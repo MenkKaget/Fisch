@@ -1,0 +1,67 @@
+if game.PlaceId == 16732694052 then
+  local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+  local Window = OrionLib:MakeWindow({
+  Name = "Enryu Script HUB", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest"
+})
+
+-- Values
+_G.autoCast = true
+_G.autoReel = true
+
+
+
+-- function
+function autoReel()
+while _G.autoReel = true do
+game:GetService("ReplicatedStorage"):WaitForChild("events"):WaitForChild("reelfinished"):FireServer(unpack(args))
+end
+end
+
+function autoCast()
+while wait() do
+game:GetService("Players").LocalPlayer.Character:FindFirstChild("Rod").events.cast:FireServer(unpack(args))
+end
+
+
+-- Window Tab
+local FishTab = Window:MakeTab({
+	Name = "Fish",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+
+-- Toggle
+FishTab:AddToggle({
+	Name = "Auto Cast",
+	Default = false,
+	Callback = function(Value)
+		_G.autoCast = Value
+		autoCast()
+	end    
+})
+
+
+FishTab:AddToggle({
+	Name = "Auto Shake",
+	Default = false,
+	Callback = function(Value)
+		print(Value)
+	end    
+})
+
+
+FishTab:AddToggle({
+	Name = "Auto Reel",
+	Default = false,
+	Callback = function(Value)
+		_G.autoReel = Value
+		autoReel()
+	end    
+})
+
+
+
+
+end
+OrionLib:Init()
